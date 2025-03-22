@@ -1,11 +1,15 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const UserModel = require("./models/Users");
 
+const cors = require("cors");
+
+app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://migueldev:sX6vS4MsUfkkGcqA@cluster0.ji63r.mongodb.net/merntutorial?retryWrites=true&w=majority&appName=Cluster0", {});
+mongoose.connect(process.env.CONNECTION_STRING, {});
 
 app.get("/getUsers", async (req, res) => {
   try {
